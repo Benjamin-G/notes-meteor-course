@@ -14,7 +14,7 @@ export const NoteList = (props) => {
       {props.notes.length === 0 ?
       <NoteListEmptyItem/> :
        props.notes.map(note => <NoteListItem key={note._id} note={note}/>)}
-       NoteList Length :{ props.notes.length }
+       NoteList :{ props.notes.length }
     </div>
   )
 }
