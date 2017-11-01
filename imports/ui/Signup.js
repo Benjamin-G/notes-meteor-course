@@ -1,31 +1,32 @@
-import React from 'react';
-import { Link } from 'react-router';
-import { Accounts } from 'meteor/accounts-base';
+import React from 'react'
+import { Link } from 'react-router'
+import { Accounts } from 'meteor/accounts-base'
+import { createContainer } from 'meteor/react-meteor-data'
 
-export default class Signup extends React.Component {
+export class Signup extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       error: ''
-    };
+    }
   }
   onSubmit(e) {
-    e.preventDefault();
+    e.preventDefault()
 
-    let email = this.refs.email.value.trim();
-    let password = this.refs.password.value.trim();
+    let email = this.refs.email.value.trim()
+    let password = this.refs.password.value.trim()
 
     if (password.length < 9) {
-      return this.setState({error: 'Password must be more than 8 characters long'});
+      return this.setState({error: 'Password must be more than 8 characters long'})
     }
 
-    Accounts.createUser({email, password}, (err) => {
+    this.props.createUser({email, password}, (err) => {
       if (err) {
-        this.setState({error: err.reason});
+        this.setState({error: err.reason})
       } else {
-        this.setState({error: ''});
+        this.setState({error: ''})
       }
-    });
+    })
   }
   render() {
     return (
@@ -44,6 +45,16 @@ export default class Signup extends React.Component {
           <Link to="/">Have an account?</Link>
         </div>
       </div>
-    );
+    )
   }
 }
+
+Signup.propTypes ={
+  createUser: React.PropTypes.func.isRequired
+}
+
+export default createContainer(() => {
+  return {
+    createUser: Accounts.createUser
+  }
+}, Signup)

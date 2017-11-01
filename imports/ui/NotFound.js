@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router';
+import React from 'react' 
+import { Link } from 'react-router'
 
 export default () => {
   return (
@@ -10,5 +10,5 @@ export default () => {
         <Link to="/" className="button button--link">HEAD HOME</Link>
       </div>
     </div>
-  );
-};
+  )
+}
