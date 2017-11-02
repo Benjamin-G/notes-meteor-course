@@ -3,24 +3,37 @@ import React from 'react'
 import expect from 'expect'
 import { mount } from 'enzyme'
 
-import NoteListItem from './NoteListItem'
+import { notes } from '../fixtures/fixtures'
+import { NoteListItem } from './NoteListItem'
 
 if(Meteor.isClient) {
   describe('NoteListItem', function () {
-    it('should render title', function(){
-      const title = 'test title'
-      const updatedAt = '1509481005046'
-      const wrapper = mount( <NoteListItem note={{ title , updatedAt }}/> )
+    let Session;
 
-      expect(wrapper.find('h5').text()).toBe(title)
+    beforeEach(() => {
+        Session = {
+          set: expect.createSpy()
+        }
+    })
+
+    it('should render title', function() {
+      const wrapper = mount( <NoteListItem note={notes[0]} Session={Session}/> )
+
+      expect(wrapper.find('h5').text()).toBe(notes[0].title)
     })
 
     it('should render default with an empty title', function(){
-      const title = ''
-      const updatedAt = ''
-      const wrapper = mount( <NoteListItem note={{ title , updatedAt }}/> )
+      const wrapper = mount( <NoteListItem note={notes[1]} Session={Session}/> )
 
       expect(wrapper.find('h5').text()).toBe('Untitled note')
+    })
+    
+    it('should call set on click', function() {
+      const wrapper = mount( <NoteListItem note={notes[0]} Session={Session}/> )
+
+      wrapper.find('div').simulate('click')
+
+      expect(Session.set).toHaveBeenCalledWith('selectedNoteId', notes[0]._id)
     })
   })
 }
