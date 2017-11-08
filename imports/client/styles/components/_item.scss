@@ -4,6 +4,7 @@
   border: 1px solid $grey;
   overflow-y: scroll;
   width: 100%;
+
 }
 
 .item-list__header {
@@ -31,6 +32,7 @@
 }
 
 .item__title {
+  color: $dark-grey;
   font-weight: normal;
   font-size: $base-font-size;
   margin-bottom: .25rem;
