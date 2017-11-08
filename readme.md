@@ -2,9 +2,6 @@
 
 Created during a Udemy course
 
-Creating new Accounts
-Managing Notes
-
 Tech used: Meteor, ReactJS, SCSS
 
 ## Getting Started
