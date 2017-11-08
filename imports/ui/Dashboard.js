@@ -7,7 +7,7 @@ import Editor from './Editor'
 export default () => {
   return (
     <div>
-      <PrivateHeader title="Notes App"/>
+      <PrivateHeader title="Notes"/>
       <div className="page-content">
         <div className="page-content__sidebar">
           <NoteList/>
