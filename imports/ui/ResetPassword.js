@@ -7,27 +7,26 @@ export class ResetPassword extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      error: ''
+      error: '',
+      emailSent: ''
     }
   }
 
-  onSubmit(e) {
+  onSubmitEmail(e) {
     e.preventDefault()
 
     let email = this.refs.email.value.trim()
-    let password = this.refs.password.value.trim()
 
-    if (password.length < 9) {
-      return this.setState({error: 'Password must be more than 8 characters long'})
-    }
-
-    this.props.createUser({email, password}, (err) => {
+    this.props.forgotPassword({ email }, (err) => {
       if (err) {
         this.setState({error: err.reason})
       } else {
         this.setState({error: ''})
       }
     })
+
+    this.state.error ? undefined : this.setState({emailSent: 'Has been submitted'})
+
   }
 
   render() {
@@ -35,6 +34,14 @@ export class ResetPassword extends React.Component {
       <div className="boxed-view">
         <div className="boxed-view__box">
           <h1>Reset Password Below</h1>
+
+          {this.state.error ? <p>{this.state.error}</p> : undefined}
+          {this.state.emailSent ? <p>{this.state.emailSent}</p> : undefined}
+
+          <form onSubmit={this.onSubmitEmail.bind(this)} noValidate className="boxed-view__form">
+            <input type="email" ref="email" name="email" placeholder="Email"/>
+            <button className="button">Send to email</button>
+          </form>
         </div>
       </div>
     )
@@ -47,6 +54,8 @@ ResetPassword.propTypes ={
 
 export default createContainer(() => {
   return {
-    createUser: Accounts.createUser
+    createUser: Accounts.createUser,
+    forgotPassword: Accounts.forgotPassword
+
   }
 }, ResetPassword)
