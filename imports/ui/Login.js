@@ -24,13 +24,19 @@ export class Login extends React.Component {
       }
     })
   }
+
   render() {
     return (
       <div className="boxed-view">
         <div className="boxed-view__box">
           <h1>Login</h1>
 
-          {this.state.error ? <p>{this.state.error}</p> : undefined}
+          {this.state.error ? (
+            <div>
+              <p>{this.state.error}</p>
+
+            </div>
+          ) : undefined}
 
           <form onSubmit={this.onSubmit.bind(this)} noValidate className="boxed-view__form">
             <input type="email" ref="email" name="email" placeholder="Email"/>
@@ -39,6 +45,8 @@ export class Login extends React.Component {
           </form>
 
           <Link to="/signup">Need an account?</Link>
+          <div/>
+          <Link to="/resetpassword">Need to ResetPassword</Link>
         </div>
       </div>
     )

@@ -6,6 +6,7 @@ import { Session } from 'meteor/session'
 import Signup from '../ui/Signup'
 import Dashboard from '../ui/Dashboard'
 import NotFound from '../ui/NotFound'
+import ResetPassword from '../ui/ResetPassword'
 import Login from '../ui/Login'
 
 const onEnterNotePage = (nextState) => {
@@ -41,6 +42,7 @@ export const routes = (
     <Route onEnter={globalOnEnter} onChange={globalOnChange}>
       <Route path="/" component={Login} privacy="unauth"/>
       <Route path="/signup" component={Signup} privacy="unauth"/>
+      <Route path="/resetpassword" component={ResetPassword} privacy="unauth"/>
       <Route path="/dashboard" component={Dashboard} privacy="auth"/>
       <Route path="/dashboard/:id" component={Dashboard} privacy="auth"
       onEnter={onEnterNotePage} onLeave={onLeaveNotePage}/>
